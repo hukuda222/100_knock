@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <form id="form" method="get" accept-charset="utf-8">
+    <input type="text" id="name">
+   </form>
+    <button id="send"></button>
+	<div id="result"></div>
+	   <script type="text/javascript">
+        $(function(){
+            $("#send").on("click",function(){
+                $("#result").children().remove();
+                $.ajax({
+                    url:"http://localhost:8080/",
+                    type:"GET",
+                    data:"name="+$("#name").val(),
+					datatype : "json",
+                })
+                .done( (data) => {
+                    data.forEach((e,i)=>{
+						console.log(e);
+                        $("<p>",{
+                            "id": "result_name"+i,
+                            "text": "Name:"+e["Name"],
+                        }).appendTo("#result");
+                        $("<p>",{
+                            "id": "result_area"+i,
+                            "text": "Area:"+e["Area"],
+                        }).appendTo("#result");
+                        if (e["Tags"]!=null){
+                          tag_text=""
+                          e["Tags"].forEach(tag=>{
+                            tag_text+=tag["Value"]+":"+tag["Count"]+", "
+                          });
+                           $("<p>",{
+                               "id": "result_tags"+i,
+                               "text": tag_text,
+                           }).appendTo("#result");
+                        }
+                        $("<hr>").appendTo("#result");
+					});
+                })
+                .fail( (err) => {
+                    console.log(err);
+                });
+            });
+        });
+
+    	</script>
+  </body>
+</html>
