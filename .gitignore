@@ -112,3 +112,6 @@ venv.bak/
 *.tab
 *.model
 *.mecab
+*.cabocha
+*.csv
+*/poyo-*
