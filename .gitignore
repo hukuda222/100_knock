@@ -104,11 +104,11 @@ venv.bak/
 .mypy_cache/
 
 # other
-.txt
-.png
-.json
-rt-polaritydata/
-.pickle
-.tab
-.model
-.mecab
+*.txt
+*.png
+*.json
+*/rt-polaritydata/
+*.pickle
+*.tab
+*.model
+*.mecab
